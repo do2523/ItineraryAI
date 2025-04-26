@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #F0F9FF;
+}
+
+td {
+    text-align: center;
+}
