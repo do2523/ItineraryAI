@@ -35,9 +35,7 @@ function SuspenseDuration() {
           <div className={styles.question}>
             How long is your stay?
             <div className={styles["input-box"]}>
-              <Suspense>
-                <RedirectInput href="questionary" />
-              </Suspense>
+              <RedirectInput href="questionary" />
             </div>
           </div>
         </div>
