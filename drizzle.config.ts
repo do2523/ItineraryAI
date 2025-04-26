@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     url: env.POSTGRES_URL,
   },
-  tablesFilter: ["knighthacks_*"],
+  tablesFilter: ["itineraryVSDB_*"],
 } satisfies Config;
