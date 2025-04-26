@@ -7,7 +7,7 @@ import { api } from "~/trpc/react";
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function Duration() {
+function SuspenseDuration() {
   const router = useRouter();
   const createSearch = api.location.createSearch.useMutation();
   const searchParams = useSearchParams();
@@ -44,4 +44,10 @@ export default function Duration() {
       </div>
     </div>
   );
+}
+
+export default function Duration() {
+  <Suspense fallback={<div>Loading...</div>}>
+    return <SuspenseDuration />;
+  </Suspense>;
 }
