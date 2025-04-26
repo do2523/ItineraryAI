@@ -35,8 +35,26 @@ export const posts = createTable(
     ),
   },
   (example) => ({
-    createdByIdIdx: index("created_by_idx").on(example.createdById),
+    createdByIdIdx: index("post_created_by_idx").on(example.createdById),
     nameIndex: index("name_idx").on(example.name),
+  }),
+);
+
+export const searches = createTable(
+  "searches",
+  {
+    id: serial("id").primaryKey(),
+    location: varchar("location", { length: 256 }),
+    createdById: varchar("created_by", { length: 255 })
+      .notNull()
+      .references(() => users.id),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (example) => ({
+    createdByIdIdx: index("searches_created_by_idx").on(example.createdById),
+    locationIndex: index("location_idx").on(example.location),
   }),
 );
 
