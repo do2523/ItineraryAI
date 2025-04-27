@@ -14,6 +14,7 @@ export const locationRouter = createTRPCRouter({
       await ctx.db.insert(searches).values({
         location: input.location,
         createdById: ctx.session.user.id,
+        username: ctx.session.user.name,
       });
     }),
 });

@@ -45,6 +45,7 @@ export const searches = createTable(
   {
     id: serial("id").primaryKey(),
     location: varchar("location", { length: 256 }),
+    username: varchar("username", { length: 256 }),
     createdById: varchar("created_by", { length: 255 })
       .notNull()
       .references(() => users.id),
@@ -55,6 +56,7 @@ export const searches = createTable(
   (example) => ({
     createdByIdIdx: index("searches_created_by_idx").on(example.createdById),
     locationIndex: index("location_idx").on(example.location),
+    usernameIndex: index("username_idx").on(example.username),
   }),
 );
 
