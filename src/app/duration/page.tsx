@@ -45,7 +45,9 @@ function SuspenseDuration() {
 }
 
 export default function Duration() {
-  <Suspense fallback={<div>Loading...</div>}>
-    return <SuspenseDuration />;
-  </Suspense>;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SuspenseDuration />;
+    </Suspense>
+  );
 }
