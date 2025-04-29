@@ -1,9 +1,14 @@
 import { api } from "~/trpc/server";
 import type { data } from "../_components/json_to_table";
 import Table from "../_components/json_to_table";
-import { getServerAuthSession } from "~/server/auth";
+// import { getServerAuthSession } from "~/server/auth";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { ItineraryPDF } from "../_components/MyPDF";
+import { set } from "zod";
+import { json } from "stream/consumers";
+import MyButtonComponent from "../_components/PdfButton";
 
 export const revalidate = 0;
 export const maxDuration = 60;
@@ -19,7 +24,7 @@ export default async function Itinerary({
   const traveler_count = searchParams.traveler_count ?? "none";
   const budget = searchParams.budget ?? "none";
 
-  const session = await getServerAuthSession();
+  // const session = await getServerAuthSession();
 
   const prompt =
     "Your job is to create detailed itinerary using the JSON syntax for the user without asking any more questions.\n" +
@@ -55,19 +60,17 @@ export default async function Itinerary({
           {capFirst(destination)}
         </h1>
         <div className="mb-10 mr-10 flex justify-end text-xl">
-          <Link
+          {/* <Link
             href={session ? "/api/auth/signout" : "/api/auth/signin"}
             className="rounded-md bg-[#334155] px-6 py-3 font-semibold text-white no-underline transition hover:bg-[#1b2534]"
           >
             {session ? "Sign out" : "Sign in"}
-          </Link>
+          </Link> */}
+
+          <MyButtonComponent prompt={prompt} />
         </div>
       </div>
-      {/* destination: {destination} <br />
-            duration: {duration} <br />
-            questionary: {questionary} <br />
-            traveler count: {traveler_count} <br />
-            budget: {budget} */}
+
       <br />
       <Suspense fallback={<CallGeminiGenerateTableFallback />}>
         <CallGeminiGenerateTable prompt={prompt} />
